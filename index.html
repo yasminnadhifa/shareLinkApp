@@ -49,7 +49,7 @@
      const id = urlParams.get('id') 
      const links = {
       android:'https://play.google.com/store/apps/details?id=com.example.app', 
-      androidScheme: `intent://products/${id}#Intent;scheme=skinsvara;package=com.example.app;S.browser_fallback_url=${encodeURIComponent('https://play.google.com/store/apps/details?id=com.example.app')};end`
+      androidScheme: `intent://products/${id}#Intent;scheme=skinsvara;package=com.skinsvara;S.browser_fallback_url=${encodeURIComponent('https://play.google.com/store/apps/details?id=com.skinsvara')};end`
     };
 
         function detectDevice() {
@@ -69,10 +69,9 @@
         const type = detectDevice();
 
         if(type === "Desktop" || type === "iOS" ){
-                      console.log(links.androidScheme)
             alert('This application is currently available on Android only. Other platforms coming soon!')
         }else if(type === "Android"){
-            window.location = `intent://products/${id}#Intent;scheme=skinsvara;package=com.skinsvara;S.browser_fallback_url=${encodeURIComponent('https://play.google.com/store/apps/details?id=com.example.app')};end`;
+            window.location = links.androidScheme
 
 
         }
