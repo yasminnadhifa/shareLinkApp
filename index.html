@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skinsvara App</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #ffffff;
+      font-family: Arial, sans-serif;
+    }
+    .logo-container {
+      text-align: center;
+    }
+    .logo-container img {
+      max-width: 70%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .fallback-text {
+      margin-top: 20px;
+      font-size: 1rem;
+      color: #555;
+    }
+    @media (max-width: 600px) {
+      .logo-container img {
+        max-width: 90%;
+      }
+      .fallback-text {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="logo-container">
+    <img src="/img/Title.svg" alt="App Logo">
+  </div>
+  <script>
+     const urlParams = new URLSearchParams(window.location.search);
+     const id = urlParams.get('id') 
+     const links = {
+      android:'https://play.google.com/store/apps/details?id=com.example.app', 
+      androidScheme: `intent://products/${id}#Intent;scheme=skinsvara;package=com.example.app;S.browser_fallback_url=${encodeURIComponent('https://play.google.com/store/apps/details?id=com.example.app')};end`
+    };
+
+        function detectDevice() {
+        const ua = navigator.userAgent || navigator.vendor || window.opera;
+
+        if (/android/i.test(ua)) {
+            return "Android";
+        }
+
+        if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+            return "iOS";
+        }
+
+        return "Desktop";
+        }
+
+        const type = detectDevice();
+
+        if(type === "Desktop" || type === "iOS" ){
+                      console.log(links.androidScheme)
+            alert('This application is currently available on Android only. Other platforms coming soon!')
+        }else if(type === "Android"){
+            window.location = `intent://products/${id}#Intent;scheme=skinsvara;package=com.skinsvara;S.browser_fallback_url=${encodeURIComponent('https://play.google.com/store/apps/details?id=com.example.app')};end`;
+
+
+        }
+  </script>
+</body>
+</html>
